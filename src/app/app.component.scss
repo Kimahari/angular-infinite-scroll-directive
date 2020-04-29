@@ -1,0 +1,29 @@
+@import "~perfect-scrollbar/css/perfect-scrollbar.css";
+
+:host {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#infinite-scroller {
+  padding: 0;
+  list-style: none;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  overflow-y: auto;
+
+  .item {
+    padding: 10px 5px;
+    line-height: 1.5;
+    &:nth-child(odd) {
+      background: #2b89b4;
+    }
+    &:nth-child(even) {
+      background: #c7c7c7;
+    }
+  }
+}

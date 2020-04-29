@@ -1,0 +1,107 @@
+import {
+  Directive,
+  Input,
+  ElementRef,
+  AfterViewInit,
+  OnDestroy,
+} from "@angular/core";
+import { Observable, fromEvent, pipe, Subscription } from "rxjs";
+
+import { map, pairwise, filter, startWith, exhaustMap } from "rxjs/operators";
+
+interface ScrollPosition {
+  sH: number;
+  sT: number;
+  cH: number;
+}
+
+const DEFAULT_SCROLL_POSITION: ScrollPosition = {
+  sH: 0,
+  sT: 0,
+  cH: 0,
+};
+
+@Directive({
+  selector: "[appInfiniteScroller]",
+})
+export class InfiniteScrollerDirective implements AfterViewInit, OnDestroy {
+  private scrollEvent$: Observable<MouseEvent>;
+
+  private userScrolledDown$: Observable<any>;
+
+  private requestStream$: Observable<any>;
+
+  private requestOnScroll$: Observable<any>;
+  requestOnScrollSubscription: Subscription;
+
+  constructor(private elm: ElementRef) {}
+
+  @Input()
+  scrollCallback;
+
+  @Input()
+  immediateCallback;
+
+  @Input()
+  scrollPercent = 70;
+
+  ngAfterViewInit() {
+    this.registerScrollEvent();
+
+    this.streamScrollEvents();
+
+    this.requestCallbackOnScroll();
+  }
+
+  ngOnDestroy() {
+    if (this.requestOnScrollSubscription) {
+      this.requestOnScrollSubscription.unsubscribe();
+      this.requestOnScrollSubscription = null;
+    }
+  }
+
+  private registerScrollEvent() {
+    this.scrollEvent$ = fromEvent(this.elm.nativeElement, "scroll");
+  }
+
+  private streamScrollEvents() {
+    this.userScrolledDown$ = this.scrollEvent$.pipe(
+      map(
+        (scrollData) =>
+          <ScrollPosition>{
+            cH: (<HTMLElement>scrollData.target).clientHeight,
+            sH: (<HTMLElement>scrollData.target).scrollHeight,
+            sT: (<HTMLElement>scrollData.target).scrollTop,
+          }
+      ),
+      pairwise(),
+      filter(
+        (positions) =>
+          this.isUserScrollingDown(positions) &&
+          this.isScrollExpectedPercent(positions[1])
+      )
+    );
+  }
+
+  private requestCallbackOnScroll() {
+    this.requestOnScroll$ = this.userScrolledDown$;
+
+    if (this.immediateCallback) {
+      this.requestOnScroll$ = this.requestOnScroll$.pipe(
+        startWith([DEFAULT_SCROLL_POSITION, DEFAULT_SCROLL_POSITION])
+      );
+    }
+
+    this.requestOnScrollSubscription = this.requestOnScroll$
+      .pipe(exhaustMap(() => this.scrollCallback && this.scrollCallback()))
+      .subscribe(() => {});
+  }
+
+  private isUserScrollingDown = (positions) => {
+    return positions[0].sT < positions[1].sT;
+  };
+
+  private isScrollExpectedPercent = (position) => {
+    return (position.sT + position.cH) / position.sH > this.scrollPercent / 100;
+  };
+}
