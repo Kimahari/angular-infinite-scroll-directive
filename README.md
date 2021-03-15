@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
 
+[![Update Angular](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/update-angular.yml/badge.svg)](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/update-angular.yml)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
