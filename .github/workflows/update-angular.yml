@@ -2,7 +2,7 @@
 
 name: Update Angular
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   workflow_dispatch:
 
@@ -18,9 +18,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Update Angular cli
-        run: npm --version
+      - name: Use Node.js 12.8
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.8
+          
+      - name: Install dependencies
+        run: npm install
 
       # Runs a single command using the runners shell
       - name: Run a one-line script

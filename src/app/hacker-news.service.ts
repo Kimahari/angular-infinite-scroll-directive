@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-const BASE_URL = "http://node-hnapi.herokuapp.com";
+const BASE_URL = 'http://node-hnapi.herokuapp.com';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class HackerNewsService {
   constructor(private http: HttpClient) {}

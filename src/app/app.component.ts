@@ -11,7 +11,7 @@ import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
 export class AppComponent implements OnInit {
   title = "infinite-scroller-poc";
 
-  currentPage: number = 1;
+  currentPage = 1;
 
   news: Array<any> = [];
 
