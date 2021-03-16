@@ -9,6 +9,7 @@
 .actrc
 update-result.txt
 to-update.txt
+act
 # dependencies
 /node_modules
 
