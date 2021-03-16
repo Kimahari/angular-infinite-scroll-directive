@@ -27,6 +27,7 @@ jobs:
         run: |
           npm install
           npm i @angular/cli -g
+          git status -s
 
       - name: Check For Updates
         env:
@@ -45,7 +46,6 @@ jobs:
             UPDATE_CMD=""
             for pkg in $(cat to-update.txt);
             do
-              echo HERE I AM ${UPDATE_CMD} $pkg
               UPDATE_CMD="${UPDATE_CMD} $pkg"
             done
             
