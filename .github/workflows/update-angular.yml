@@ -29,6 +29,8 @@ jobs:
           npm i @angular/cli -g
 
       - name: Check For Updates
+        env:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ng update | tee update-result.txt
 
