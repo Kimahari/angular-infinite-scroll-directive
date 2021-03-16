@@ -4,10 +4,10 @@ import {
   ElementRef,
   AfterViewInit,
   OnDestroy,
-} from '@angular/core';
-import { Observable, fromEvent, pipe, Subscription } from 'rxjs';
+} from "@angular/core";
+import { Observable, fromEvent, pipe, Subscription } from "rxjs";
 
-import { map, pairwise, filter, startWith, exhaustMap } from 'rxjs/operators';
+import { map, pairwise, filter, startWith, exhaustMap } from "rxjs/operators";
 
 interface ScrollPosition {
   sH: number;
@@ -22,7 +22,7 @@ const DEFAULT_SCROLL_POSITION: ScrollPosition = {
 };
 
 @Directive({
-  selector: '[appInfiniteScroller]',
+  selector: "[appInfiniteScroller]",
 })
 export class InfiniteScrollerDirective implements AfterViewInit, OnDestroy {
   private scrollEvent$: Observable<MouseEvent>;
@@ -61,7 +61,7 @@ export class InfiniteScrollerDirective implements AfterViewInit, OnDestroy {
   }
 
   private registerScrollEvent() {
-    this.scrollEvent$ = fromEvent(this.elm.nativeElement, 'scroll');
+    this.scrollEvent$ = fromEvent(this.elm.nativeElement, "scroll");
   }
 
   private streamScrollEvents() {
@@ -99,9 +99,9 @@ export class InfiniteScrollerDirective implements AfterViewInit, OnDestroy {
 
   private isUserScrollingDown = (positions) => {
     return positions[0].sT < positions[1].sT;
-  }
+  };
 
   private isScrollExpectedPercent = (position) => {
     return (position.sT + position.cH) / position.sH > this.scrollPercent / 100;
-  }
+  };
 }
