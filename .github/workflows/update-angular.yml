@@ -49,6 +49,8 @@ jobs:
               UPDATE_CMD="${UPDATE_CMD} $pkg"
             done
             
+            git status -s
+            
             ng update $UPDATE_CMD --verbose --force
           fi
       # Runs a set of commands using the runners shell
