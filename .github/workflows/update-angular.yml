@@ -68,3 +68,11 @@ jobs:
         uses: peterjgrainger/action-create-branch@v2.0.1
         with:
           branch: '${{ steps.updates.outputs.branch_name }}'
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: peter-evans/create-pull-request@v3
+        with: 
+          commit-message: 'Angular Automated Upgrade'
+          delete-branch: true
+          token: ${{ secrets.GITHUB_TOKEN }}
