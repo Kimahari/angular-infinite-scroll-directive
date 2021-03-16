@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 [![Update Angular](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/update-angular.yml/badge.svg)](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/update-angular.yml) 
 
-[![CI](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml/badge.svg)](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml)
+[![CI](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml/badge.svg?branch=master)](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml)
 
 ## Development server
 
