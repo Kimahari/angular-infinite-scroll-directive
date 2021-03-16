@@ -11,5 +11,5 @@ then
     UPDATE_CMD="${UPDATE_CMD} $pkg"
   done
   
-  ng update $UPDATE_CMD --verbose
+  ng update $UPDATE_CMD --verbose --force
 fi
