@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { HackerNewsService } from "./hacker-news.service";
-import { tap } from "rxjs/operators";
-import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
+import { Component, OnInit } from '@angular/core';
+import { HackerNewsService } from './hacker-news.service';
+import { tap } from 'rxjs/operators';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = "infinite-scroller-poc";
+  title = 'infinite-scroller-poc';
 
   currentPage = 1;
 
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   }
 
   private processData(news: any[]) {
-    console.log("here is am 2", news);
+    console.log('here is am 2', news);
 
     this.currentPage++;
     this.news = this.news.concat(news);
