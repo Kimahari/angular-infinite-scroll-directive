@@ -6,7 +6,9 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
-
+.actrc
+update-result.txt
+to-update.txt
 # dependencies
 /node_modules
 
