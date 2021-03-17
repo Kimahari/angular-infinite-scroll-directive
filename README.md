@@ -6,6 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 [![CI](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml/badge.svg?branch=master)](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml)
 
+[![BCH compliance](https://bettercodehub.com/edge/badge/Kimahari/angular-infinite-scroll-directive?branch=master)](https://bettercodehub.com/)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
