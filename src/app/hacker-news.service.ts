@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-const BASE_URL = 'http://node-hnapi.herokuapp.com';
+const BASE_URL = 'https://node-hnapi.herokuapp.com';
 
 @Injectable({
   providedIn: 'root',
