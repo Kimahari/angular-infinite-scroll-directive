@@ -1,18 +1,18 @@
-import { AppPage } from "./app.po";
-import { browser, logging } from "protractor";
+import { AppPage } from './app.po';
+import { browser, logging } from 'protractor';
 
-describe("workspace-project App", () => {
+describe('workspace-project App', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it("should display welcome message", async (done) => {
+  it('should display welcome message', async (done) => {
     page.navigateTo();
     const title = page.getTitleText();
 
-    expect(title).toEqual("infinite-scroller-poc app is running!");
+    expect(title).toEqual('infinite-scroller-poc app is running!');
 
     done();
   });

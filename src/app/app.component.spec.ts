@@ -1,8 +1,8 @@
-import { AppComponent } from "./app.component";
-import { Spectator, createComponentFactory } from "@ngneat/spectator";
-import { HttpClient } from "@angular/common/http";
+import { AppComponent } from './app.component';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { HttpClient } from '@angular/common/http';
 
-describe("nameComponent", () => {
+describe('nameComponent', () => {
   let spectator: Spectator<AppComponent>;
 
   const createComponent = createComponentFactory({
@@ -12,7 +12,7 @@ describe("nameComponent", () => {
 
   beforeEach(() => (spectator = createComponent()));
 
-  it("should create the app", () => {
+  it('should create the app', () => {
     expect(spectator.component).toBeTruthy();
   });
 });

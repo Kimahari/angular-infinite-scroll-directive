@@ -1,4 +1,4 @@
-import { browser, by, element } from "protractor";
+import { browser, by, element } from 'protractor';
 
 export class AppPage {
   navigateTo(): Promise<unknown> {
@@ -7,7 +7,7 @@ export class AppPage {
   }
 
   getTitleText() {
-    const selector = by.css("app-root .content span");
+    const selector = by.css('app-root .content span');
     return element(selector).getText();
   }
 }
