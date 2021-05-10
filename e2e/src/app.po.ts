@@ -1,13 +1,13 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element } from "protractor";
 
 export class AppPage {
   navigateTo(): Promise<unknown> {
+    browser.waitForAngularEnabled(false);
     return browser.get(browser.baseUrl) as Promise<unknown>;
   }
 
-  getTitleText(): Promise<string> {
-    return element(
-      by.css('app-root .content span')
-    ).getText() as Promise<string>;
+  getTitleText() {
+    const selector = by.css("app-root .content span");
+    return element(selector).getText();
   }
 }
