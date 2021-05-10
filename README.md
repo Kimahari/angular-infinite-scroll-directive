@@ -2,7 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
 
-[![Update Angular](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/update-angular.yml/badge.svg)](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/update-angular.yml)
+[![Update Angular](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/update-angular.yml/badge.svg)](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/update-angular.yml) 
+
+[![CI](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml/badge.svg?branch=master)](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml)
+
+[![BCH compliance](https://bettercodehub.com/edge/badge/Kimahari/angular-infinite-scroll-directive?branch=master)](https://bettercodehub.com/)
 
 ## Development server
 
