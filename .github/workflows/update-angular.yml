@@ -19,10 +19,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Use Node.js 12.8
+      - name: Use Node.js 14.15
         uses: actions/setup-node@v1
         with:
-          node-version: 12.8
+          node-version: 14.15
 
       - name: Install dependencies
         run: |
@@ -41,16 +41,16 @@ jobs:
           if [[ $(head -n 12 ./update-result.txt) = *"We analyzed your package.json, there are some packages to update:"* ]];
           then
             grep -E "^\s+[@/a-zA-Z0-9]+\s+.+->" update-result.txt | awk '{print $1}' | tee to-update.txt
-            
+
             UPDATE_CMD=""
             for pkg in $(cat to-update.txt);
             do
               UPDATE_CMD="${UPDATE_CMD} $pkg"
             done
-            
+
             git reset --hard
             git status -s
-            
+
             ng update $UPDATE_CMD --verbose --force
 
             update_name=$(date +'%m-%d-%Y')
@@ -66,7 +66,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: peter-evans/create-pull-request@v3
-        with: 
+        with:
           commit-message: 'Angular Automated Upgrade'
           delete-branch: true
           branch: '${{ steps.updates.outputs.branch_name }}'
