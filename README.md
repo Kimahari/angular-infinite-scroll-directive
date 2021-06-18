@@ -8,6 +8,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/Kimahari/angular-infinite-scroll-directive?branch=master)](https://bettercodehub.com/)
 
+[![dependencies Status](https://status.david-dm.org/gh/Kimahari/angular-infinite-scroll-directive.svg?style=flat-square)](https://david-dm.org/Kimahari/angular-infinite-scroll-directive)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
