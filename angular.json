@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "infinite-scroller-poc": {
@@ -10,24 +10,24 @@
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/infinite-scroller-poc",
+      "sourceRoot": "apps/infinite-scroller-poc/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/infinite-scroller-poc",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/apps/infinite-scroller-poc",
+            "index": "apps/infinite-scroller-poc/src/index.html",
+            "main": "apps/infinite-scroller-poc/src/main.ts",
+            "polyfills": "apps/infinite-scroller-poc/src/polyfills.ts",
+            "tsConfig": "apps/infinite-scroller-poc/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/infinite-scroller-poc/src/favicon.ico",
+              "apps/infinite-scroller-poc/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "apps/infinite-scroller-poc/src/styles.scss"
             ],
             "scripts": [],
             "vendorChunk": true,
@@ -41,8 +41,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/infinite-scroller-poc/src/environments/environment.ts",
+                  "with": "apps/infinite-scroller-poc/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -87,16 +87,16 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
+            "main": "apps/infinite-scroller-poc/src/test.ts",
+            "polyfills": "apps/infinite-scroller-poc/src/polyfills.ts",
+            "tsConfig": "apps/infinite-scroller-poc/tsconfig.spec.json",
+            "karmaConfig": "apps/infinite-scroller-poc/karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/infinite-scroller-poc/src/favicon.ico",
+              "apps/infinite-scroller-poc/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "apps/infinite-scroller-poc/src/styles.scss"
             ],
             "scripts": []
           }
@@ -105,9 +105,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "apps/infinite-scroller-poc/tsconfig.app.json",
+              "apps/infinite-scroller-poc/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -127,6 +126,37 @@
           }
         }
       }
-    }},
-  "defaultProject": "infinite-scroller-poc"
+    },
+    "infinite-scroller-poc-e2e": {
+      "root": "apps/infinite-scroller-poc-e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/infinite-scroller-poc-e2e/protractor.conf.js",
+            "devServerTarget": "infinite-scroller-poc:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "infinite-scroller-poc:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/infinite-scroller-poc-e2e/tsconfig.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "infinite-scroller-poc",
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  }
 }

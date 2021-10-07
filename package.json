@@ -2,14 +2,32 @@
   "name": "infinite-scroller-poc",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
+    "ng": "nx",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test --watch=false --browsers=ChromeHeadless",
-    "lint": "ng lint",
+    "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
     "predeploy": "ng build --configuration production --output-path docs --base-href /angular-infinite-scroll-directive/",
-    "deploy": "gh-pages -d docs"
+    "deploy": "gh-pages -d docs",
+    "nx": "nx",
+    "affected:apps": "nx affected:apps",
+    "affected:libs": "nx affected:libs",
+    "affected:build": "nx affected:build",
+    "affected:e2e": "nx affected:e2e",
+    "affected:test": "nx affected:test",
+    "affected:lint": "nx affected:lint",
+    "affected:dep-graph": "nx affected:dep-graph",
+    "affected": "nx affected",
+    "format": "nx format:write",
+    "format:write": "nx format:write",
+    "format:check": "nx format:check",
+    "update": "ng update @nrwl/workspace",
+    "update:check": "ng update",
+    "dep-graph": "nx dep-graph",
+    "workspace-schematic": "nx workspace-schematic",
+    "help": "nx help",
+    "postinstall": "node ./decorate-angular-cli.js"
   },
   "private": true,
   "dependencies": {
@@ -24,7 +42,8 @@
     "ngx-perfect-scrollbar": "^10.1.1",
     "rxjs": "^6.5.3",
     "tslib": "^2.2.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "@nrwl/angular": "12.9.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.9",
@@ -47,6 +66,8 @@
     "protractor": "~7.0.0",
     "ts-node": "~9.1.1",
     "tslint": "~6.1.0",
-    "typescript": "~4.2.4"
+    "typescript": "~4.2.4",
+    "@nrwl/workspace": "12.9.0",
+    "prettier": "^2.3.1"
   }
 }

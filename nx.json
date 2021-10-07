@@ -1,0 +1,25 @@
+{
+  "npmScope": "infinite-scroller-poc",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
+  },
+  "projects": {
+    "infinite-scroller-poc": {
+      "tags": []
+    },
+    "infinite-scroller-poc-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "infinite-scroller-poc"
+      ]
+    }
+  }
+}
