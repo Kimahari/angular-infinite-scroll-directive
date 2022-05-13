@@ -29,3 +29,10 @@ jobs:
       run: npm test
     - name: E2E
       run: npm run
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: E2E
+      run: npm deploy
