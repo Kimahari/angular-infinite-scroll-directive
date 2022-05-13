@@ -41,8 +41,6 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Deploy
-      uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
-      with: 
-        github_access_token: ${{ secrets.GITHUB_TOKEN }}
-        base_href: /angular-infinite-scroll-directive/
-        angular_dist_build_folder: dist/infinite-scroller-poc
+      run: npm deploy
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
