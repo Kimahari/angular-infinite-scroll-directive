@@ -41,6 +41,6 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Deploy
-      run: npm deploy
+      run: npm run deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
