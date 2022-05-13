@@ -45,3 +45,4 @@ jobs:
       with: 
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
         base_href: /angular-infinite-scroll-directive/
+        angular_dist_build_folder: dist/infinite-scroller-poc
