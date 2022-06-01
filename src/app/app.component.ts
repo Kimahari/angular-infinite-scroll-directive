@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { HackerNewsService } from './hacker-news.service';
 import { tap } from 'rxjs/operators';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -16,11 +16,14 @@ export class AppComponent {
   news: Array<any> = [];
 
   scrollCallback;
+  version = '';
 
   config: PerfectScrollbarConfigInterface = {};
 
-  constructor(private service: HackerNewsService) {
+  constructor(private service: HackerNewsService, private ref: ElementRef) {
     this.scrollCallback = this.getStories.bind(this);
+    const html = ref.nativeElement as HTMLElement;
+    this.version = html.attributes['ng-version'].value;
   }
 
   getStories() {
