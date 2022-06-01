@@ -20,7 +20,6 @@ jobs:
       with:
         node-version: 14.15
     - name: Cache node modules
-        id: cache-npm
         uses: actions/cache@v3
         env:
           cache-name: cache-node-modules-ci
@@ -45,7 +44,6 @@ jobs:
       with:
         node-version: 14.15
     - name: Cache node modules
-        id: cache-npm
         uses: actions/cache@v3
         env:
           cache-name: cache-node-modules-ci
@@ -75,7 +73,6 @@ jobs:
       with:
         node-version: 14.15
     - name: Cache node modules
-        id: cache-npm
         uses: actions/cache@v3
         env:
           cache-name: cache-node-modules-ci
@@ -104,7 +101,6 @@ jobs:
       with:
         node-version: 14.15
     - name: Cache node modules
-        id: cache-npm
         uses: actions/cache@v3
         env:
           cache-name: cache-node-modules-ci
@@ -130,7 +126,6 @@ jobs:
       with:
         node-version: 14.15
     - name: Cache node modules
-        id: cache-npm
         uses: actions/cache@v3
         env:
           cache-name: cache-node-modules-ci
