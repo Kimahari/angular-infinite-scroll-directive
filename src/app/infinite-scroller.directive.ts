@@ -2,7 +2,7 @@ import {
   Directive,
   Input,
   ElementRef,
-  AfterViewInit,
+  AfterContentInit,
   OnDestroy,
 } from '@angular/core';
 import { Observable, fromEvent, pipe, Subscription } from 'rxjs';
@@ -24,7 +24,7 @@ const DEFAULT_SCROLL_POSITION: ScrollPosition = {
 @Directive({
   selector: '[appInfiniteScroller]',
 })
-export class InfiniteScrollerDirective implements AfterViewInit, OnDestroy {
+export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
   private scrollEvent$: Observable<MouseEvent>;
 
   private userScrolledDown$: Observable<any>;
@@ -45,7 +45,7 @@ export class InfiniteScrollerDirective implements AfterViewInit, OnDestroy {
   @Input()
   scrollPercent = 70;
 
-  ngAfterViewInit() {
+  ngAfterContentInit() {
     this.registerScrollEvent();
 
     this.streamScrollEvents();
