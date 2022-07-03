@@ -34,7 +34,7 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
   private requestOnScroll$: Observable<any>;
   requestOnScrollSubscription: Subscription;
 
-  constructor(private elm: ElementRef) {}
+  constructor(private elm: ElementRef) { }
 
   @Input()
   scrollCallback;
@@ -47,10 +47,6 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
 
   ngAfterContentInit() {
     this.registerScrollEvent();
-
-    this.streamScrollEvents();
-
-    this.requestCallbackOnScroll();
   }
 
   ngOnDestroy() {
@@ -62,17 +58,18 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
 
   private registerScrollEvent() {
     this.scrollEvent$ = fromEvent(this.elm.nativeElement, 'scroll');
+    this.streamScrollEvents();
   }
 
   private streamScrollEvents() {
     this.userScrolledDown$ = this.scrollEvent$.pipe(
       map(
         (scrollData) =>
-          ({
-            cH: (scrollData.target as HTMLElement).clientHeight,
-            sH: (scrollData.target as HTMLElement).scrollHeight,
-            sT: (scrollData.target as HTMLElement).scrollTop,
-          } as ScrollPosition)
+        ({
+          cH: (scrollData.target as HTMLElement).clientHeight,
+          sH: (scrollData.target as HTMLElement).scrollHeight,
+          sT: (scrollData.target as HTMLElement).scrollTop,
+        } as ScrollPosition)
       ),
       pairwise(),
       filter(
@@ -81,10 +78,17 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
           this.isScrollExpectedPercent(positions[1])
       )
     );
+
+    this.requestCallbackOnScroll();
   }
 
   private requestCallbackOnScroll() {
     this.requestOnScroll$ = this.userScrolledDown$;
+
+    if (!this.requestOnScroll$) {
+      console.warn('failed to bind scroll callback.');
+      return;
+    }
 
     if (this.immediateCallback) {
       this.requestOnScroll$ = this.requestOnScroll$.pipe(
@@ -94,7 +98,7 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
 
     this.requestOnScrollSubscription = this.requestOnScroll$
       .pipe(exhaustMap(() => this.scrollCallback && this.scrollCallback()))
-      .subscribe(() => {});
+      .subscribe(() => { });
   }
 
   private isUserScrollingDown = (positions) => {
