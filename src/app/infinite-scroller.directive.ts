@@ -57,6 +57,7 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
   }
 
   private registerScrollEvent() {
+    if(!this.elm)return;
     this.scrollEvent$ = fromEvent(this.elm.nativeElement, "scroll");
     this.streamScrollEvents();
   }
