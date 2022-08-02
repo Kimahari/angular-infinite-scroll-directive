@@ -101,7 +101,7 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
         .pipe(exhaustMap(() => this.scrollCallback && this.scrollCallback()))
         .subscribe(() => {});
     } catch (error) {
-      console.warn("failed to bind scroll callback.");
+      console.warn("failed to bind scroll callback .");
     }
   }
 
