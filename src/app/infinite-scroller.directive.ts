@@ -4,10 +4,10 @@ import {
   ElementRef,
   AfterContentInit,
   OnDestroy,
-} from '@angular/core';
-import { Observable, fromEvent, pipe, Subscription } from 'rxjs';
+} from "@angular/core";
+import { Observable, fromEvent, pipe, Subscription } from "rxjs";
 
-import { map, pairwise, filter, startWith, exhaustMap } from 'rxjs/operators';
+import { map, pairwise, filter, startWith, exhaustMap } from "rxjs/operators";
 
 interface ScrollPosition {
   sH: number;
@@ -22,7 +22,7 @@ const DEFAULT_SCROLL_POSITION: ScrollPosition = {
 };
 
 @Directive({
-  selector: '[appInfiniteScroller]',
+  selector: "[appInfiniteScroller]",
 })
 export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
   private scrollEvent$: Observable<MouseEvent>;
@@ -34,7 +34,7 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
   private requestOnScroll$: Observable<any>;
   requestOnScrollSubscription: Subscription;
 
-  constructor(private elm: ElementRef) { }
+  constructor(private elm: ElementRef) {}
 
   @Input()
   scrollCallback;
@@ -57,7 +57,7 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
   }
 
   private registerScrollEvent() {
-    this.scrollEvent$ = fromEvent(this.elm.nativeElement, 'scroll');
+    this.scrollEvent$ = fromEvent(this.elm.nativeElement, "scroll");
     this.streamScrollEvents();
   }
 
@@ -65,11 +65,11 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
     this.userScrolledDown$ = this.scrollEvent$.pipe(
       map(
         (scrollData) =>
-        ({
-          cH: (scrollData.target as HTMLElement).clientHeight,
-          sH: (scrollData.target as HTMLElement).scrollHeight,
-          sT: (scrollData.target as HTMLElement).scrollTop,
-        } as ScrollPosition)
+          ({
+            cH: (scrollData.target as HTMLElement).clientHeight,
+            sH: (scrollData.target as HTMLElement).scrollHeight,
+            sT: (scrollData.target as HTMLElement).scrollTop,
+          } as ScrollPosition)
       ),
       pairwise(),
       filter(
@@ -85,27 +85,31 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
   private requestCallbackOnScroll() {
     this.requestOnScroll$ = this.userScrolledDown$;
 
-    if (!this.requestOnScroll$) {
-      console.warn('failed to bind scroll callback.');
-      return;
-    }
+    try {
+      if (this.requestOnScroll$ == undefined || this.requestOnScroll$ == null) {
+        console.warn("failed to bind scroll callback.");
+        return;
+      }
 
-    if (this.immediateCallback) {
-      this.requestOnScroll$ = this.requestOnScroll$.pipe(
-        startWith([DEFAULT_SCROLL_POSITION, DEFAULT_SCROLL_POSITION])
-      );
-    }
+      if (this.immediateCallback) {
+        this.userScrolledDown$ = this.userScrolledDown$.pipe(
+          startWith([DEFAULT_SCROLL_POSITION, DEFAULT_SCROLL_POSITION])
+        );
+      }
 
-    this.requestOnScrollSubscription = this.requestOnScroll$
-      .pipe(exhaustMap(() => this.scrollCallback && this.scrollCallback()))
-      .subscribe(() => { });
+      this.requestOnScrollSubscription = this.userScrolledDown$
+        .pipe(exhaustMap(() => this.scrollCallback && this.scrollCallback()))
+        .subscribe(() => {});
+    } catch (error) {
+      console.warn("failed to bind scroll callback.");
+    }
   }
 
   private isUserScrollingDown = (positions) => {
     return positions[0].sT < positions[1].sT;
-  }
+  };
 
   private isScrollExpectedPercent = (position) => {
     return (position.sT + position.cH) / position.sH > this.scrollPercent / 100;
-  }
+  };
 }
