@@ -4,11 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { InfiniteScrollerDirective } from './infinite-scroller.directive';
 import { HttpClientModule } from '@angular/common/http';
-
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from './modules/ngx-perfect-scrollbar/perfect-scrollbar.interfaces';
+import { PerfectScrollbarModule } from './modules/ngx-perfect-scrollbar/perfect-scrollbar.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -25,4 +22,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

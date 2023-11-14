@@ -1,7 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
 import { HackerNewsService } from './hacker-news.service';
 import { tap } from 'rxjs/operators';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from './modules/ngx-perfect-scrollbar/perfect-scrollbar.interfaces';
 
 @Component({
   selector: 'app-root',
