@@ -70,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "infinite-scroller-poc:build"
+            "buildTarget": "infinite-scroller-poc:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "infinite-scroller-poc:build:production"
+              "buildTarget": "infinite-scroller-poc:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "infinite-scroller-poc:build"
+            "buildTarget": "infinite-scroller-poc:build"
           }
         },
         "test": {
