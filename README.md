@@ -6,9 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 [![CI](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml/badge.svg?branch=master)](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml)
 
-[![BCH compliance](https://bettercodehub.com/edge/badge/Kimahari/angular-infinite-scroll-directive?branch=master)](https://bettercodehub.com/)
-
-[![dependencies Status](https://status.david-dm.org/gh/Kimahari/angular-infinite-scroll-directive.svg?style=flat-square)](https://david-dm.org/Kimahari/angular-infinite-scroll-directive)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a7f91b25-2110-48f8-9243-96b3c63676e8/deploy-status)](https://app.netlify.com/sites/angular-infinite-scroll-poc/deploys)
 
 ## Development server
 
