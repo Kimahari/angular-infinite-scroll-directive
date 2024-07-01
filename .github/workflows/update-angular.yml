@@ -20,10 +20,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Use Node.js 18.13
+      - name: Use Node.js 20.15
         uses: actions/setup-node@v1
         with:
-          node-version: 18.13
+          node-version: 20.15
 
       - name: Install dependencies
         run: |
