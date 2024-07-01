@@ -1,6 +1,6 @@
 import { AppComponent } from "./app.component";
 import { Spectator, createComponentFactory } from "@ngneat/spectator";
-import {} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import { InfiniteScrollerDirective } from "./infinite-scroller.directive";
 
 describe("nameComponent", () => {
@@ -10,7 +10,7 @@ describe("nameComponent", () => {
     component: AppComponent,
     mocks: [InfiniteScrollerDirective],
     declarations: [],
-    imports : [HttpClientTestingModule]
+    providers : [provideHttpClientTesting()]
   });
 
   beforeEach(() => (spectator = createComponent()));
