@@ -1,6 +1,6 @@
 import { AppComponent } from "./app.component";
 import { Spectator, createComponentFactory } from "@ngneat/spectator";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
+import {} from "@angular/common/http/testing";
 import { InfiniteScrollerDirective } from "./infinite-scroller.directive";
 
 describe("nameComponent", () => {
