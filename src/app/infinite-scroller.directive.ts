@@ -22,7 +22,8 @@ const DEFAULT_SCROLL_POSITION: ScrollPosition = {
 };
 
 @Directive({
-  selector: "[appInfiniteScroller]",
+    selector: "[appInfiniteScroller]",
+    standalone: false
 })
 export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
   private scrollEvent$: Observable<MouseEvent>;
