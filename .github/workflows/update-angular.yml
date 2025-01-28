@@ -27,8 +27,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install
           npm i @angular/cli -g
+          npm install
+          
 
       - name: Check For Updates
         id: updates
