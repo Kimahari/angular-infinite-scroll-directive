@@ -53,6 +53,27 @@ npm run build
 Import and use the infinite scroll directive in your Angular components.  
 See the source code for example usage.
 
+## Usage Example
+
+```html
+<div
+  appInfiniteScroller
+  [scrollCallback]="loadMore"
+  [scrollPercent]="80"
+  (scrolled)="onScrolled()"
+  style="height: 400px; overflow: auto;"
+>
+  <!-- Your list here -->
+</div>
+```
+
+```typescript
+loadMore = () => this.dataService.fetchNextPage();
+onScrolled() {
+  // Optional: handle scroll event
+}
+```
+
 ## Deployment
 
 This project uses GitHub Actions for CI/CD and can be deployed to GitHub Pages:

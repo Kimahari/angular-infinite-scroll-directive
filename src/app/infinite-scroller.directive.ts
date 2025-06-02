@@ -1,114 +1,97 @@
 import {
   Directive,
-  Input,
   ElementRef,
+  Input,
   AfterContentInit,
   OnDestroy,
-} from "@angular/core";
-import { Observable, fromEvent, pipe, Subscription } from "rxjs";
-import { debounceTime, map, pairwise, filter, startWith, exhaustMap } from "rxjs/operators";
+  OnChanges,
+  SimpleChanges,
+  Output,
+  EventEmitter
+} from '@angular/core';
+import { Observable, Subscription, fromEvent, of } from 'rxjs';
+import { map, pairwise, filter, throttleTime, switchMap, startWith } from 'rxjs/operators';
 
-interface ScrollPosition {
-  sH: number;
-  sT: number;
-  cH: number;
-}
-
-const DEFAULT_SCROLL_POSITION: ScrollPosition = {
-  sH: 0,
-  sT: 0,
-  cH: 0,
-};
-
+/**
+ * InfiniteScrollerDirective
+ * Adds infinite scroll behavior to a scrollable element.
+ */
 @Directive({
-    selector: "[appInfiniteScroller]",
-    standalone: false
+  selector: '[appInfiniteScroller]',
+  standalone: false
 })
-export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
-  private scrollEvent$: Observable<MouseEvent>;
-
-  private userScrolledDown$: Observable<any>;
-
-  private requestStream$: Observable<any>;
-
-  private requestOnScroll$: Observable<any>;
-  requestOnScrollSubscription: Subscription;
-
-  constructor(private elm: ElementRef) {}
+export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy, OnChanges {
+  private scrollEvent$: Observable<Event>;
+  private requestOnScrollSubscription?: Subscription;
 
   @Input() scrollCallback!: () => Observable<any>;
+  @Input() immediateCallback = false;
+  @Input() scrollPercent = 70;
+  @Input() scrollContainer?: HTMLElement; // Optional custom container
 
-  @Input() immediateCallback: boolean = false;
+  @Output() scrolled = new EventEmitter<void>();
 
-  @Input() scrollPercent: number = 70;
+  constructor(private readonly elm: ElementRef) {}
 
-  ngAfterContentInit() {
+  ngAfterContentInit(): void {
     this.registerScrollEvent();
-  }
-
-  ngOnDestroy() {
-    if (this.requestOnScrollSubscription) {
-      this.requestOnScrollSubscription.unsubscribe();
-      this.requestOnScrollSubscription = null;
+    if (this.immediateCallback) {
+      this.triggerCallback();
     }
   }
 
-  private registerScrollEvent() {
-    if(!this.elm)return;
-    this.scrollEvent$ = fromEvent(this.elm.nativeElement, "scroll");
-    this.streamScrollEvents();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['scrollCallback'] && !changes['scrollCallback'].firstChange) {
+      this.registerScrollEvent();
+    }
   }
 
-  private streamScrollEvents() {
-    this.userScrolledDown$ = this.scrollEvent$.pipe(
-      debounceTime(100),
-      map(
-        (scrollData) =>
-          ({
-            cH: (scrollData.target as HTMLElement).clientHeight,
-            sH: (scrollData.target as HTMLElement).scrollHeight,
-            sT: (scrollData.target as HTMLElement).scrollTop,
-          } as ScrollPosition)
-      ),
-      pairwise(),
-      filter(
-        (positions) =>
-          this.isUserScrollingDown(positions) &&
-          this.isScrollExpectedPercent(positions[1])
+  ngOnDestroy(): void {
+    this.requestOnScrollSubscription?.unsubscribe();
+  }
+
+  /**
+   * Registers the scroll event and sets up the infinite scroll logic.
+   */
+  private registerScrollEvent(): void {
+    this.requestOnScrollSubscription?.unsubscribe();
+
+    const container = this.scrollContainer || this.elm.nativeElement;
+    this.scrollEvent$ = fromEvent(container, 'scroll');
+
+    this.requestOnScrollSubscription = this.scrollEvent$
+      .pipe(
+        throttleTime(100),
+        map(() => this.calculateScrollPercent(container)),
+        pairwise(),
+        filter(([prev, curr]) => curr > prev && curr > this.scrollPercent)
       )
-    );
-
-    this.requestCallbackOnScroll();
+      .subscribe(() => {
+        this.triggerCallback();
+      });
   }
 
-  private requestCallbackOnScroll() {
-    this.requestOnScroll$ = this.userScrolledDown$;
+  /**
+   * Calculates the current scroll percent.
+   */
+  private calculateScrollPercent(container: HTMLElement): number {
+    const scrollTop = container.scrollTop;
+    const scrollHeight = container.scrollHeight;
+    const clientHeight = container.clientHeight;
+    return ((scrollTop + clientHeight) / scrollHeight) * 100;
+  }
 
-    try {
-      if (this.requestOnScroll$ == undefined || this.requestOnScroll$ == null) {
-        console.warn("failed to bind scroll callback.");
-        return;
-      }
-
-      if (this.immediateCallback) {
-        this.userScrolledDown$ = this.userScrolledDown$.pipe(
-          startWith([DEFAULT_SCROLL_POSITION, DEFAULT_SCROLL_POSITION])
-        );
-      }
-
-      this.requestOnScrollSubscription = this.userScrolledDown$
-        .pipe(exhaustMap(() => this.scrollCallback && this.scrollCallback()))
-        .subscribe(() => {});
-    } catch (error) {
-      console.warn("failed to bind scroll callback .");
+  /**
+   * Triggers the scroll callback and emits the scrolled event.
+   */
+  private triggerCallback(): void {
+    if (typeof this.scrollCallback === 'function') {
+      this.scrollCallback().subscribe({
+        next: () => this.scrolled.emit(),
+        error: (err) => console.error('InfiniteScrollerDirective callback error:', err)
+      });
+    } else {
+      console.warn('InfiniteScrollerDirective: scrollCallback is not a function');
     }
   }
-
-  private isUserScrollingDown = (positions) => {
-    return positions[0].sT < positions[1].sT;
-  };
-
-  private isScrollExpectedPercent = (position) => {
-    return (position.sT + position.cH) / position.sH > this.scrollPercent / 100;
-  };
 }
