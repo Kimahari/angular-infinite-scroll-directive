@@ -14,10 +14,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js 20.15
+    - name: Use Node.js 22.16
       uses: actions/setup-node@v1
       with:
-        node-version: 20.15
+        node-version: 22.16
     - name: Cache node modules
       uses: actions/cache@v3.4.0
       env:
