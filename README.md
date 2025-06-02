@@ -1,40 +1,70 @@
-# Infinite Scroller Poc
+# Angular Infinite Scroll Directive
 
-A demo Angular application that showcases an infinite scrolling directive integrated with Perfect Scrollbar. The app fetches stories from the Hacker News API as you scroll.
+[![Build Status](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml/badge.svg)](https://github.com/Kimahari/angular-infinite-scroll-directive/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[![Update Angular](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/update-angular.yml/badge.svg)](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/update-angular.yml)
-
-[![CI](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml/badge.svg?branch=master)](https://github.com/Kimahari/angular-infinite-scroll-directive/actions/workflows/test-angular.yml)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/a7f91b25-2110-48f8-9243-96b3c63676e8/deploy-status)](https://app.netlify.com/sites/angular-infinite-scroll-poc/deploys)
+A proof-of-concept Angular project demonstrating an infinite scroll directive using [perfect-scrollbar](https://github.com/mdbootstrap/perfect-scrollbar).
 
 ## Features
 
-- **Angular 19** – The project began on Angular 9 but is automatically kept current using GitHub Actions.
-- **Custom `InfiniteScrollerDirective`** – Emits a callback when scrolling past a configurable percentage.
-- **Perfect Scrollbar integration** – Provides nicer scrollbars via a small wrapper module.
-- **Hacker News service** – Demonstrates loading data from `node-hnapi.herokuapp.com`.
+- Infinite scrolling for lists and grids
+- Custom Angular directive for easy integration
+- Uses [perfect-scrollbar](https://github.com/mdbootstrap/perfect-scrollbar) for enhanced scrollbars
+- Unit and E2E tests included
+- CI/CD with GitHub Actions
 
-## Getting started
+## Getting Started
 
-1. Install dependencies with `npm install`.
-2. Run a development server using `npm start` (or `ng serve`) and open `http://localhost:4200/`.
-3. Execute tests via `npm test`.
-4. Build for production with `npm run build -- --configuration production`.
+### Prerequisites
 
-### Using the directive
+- [Node.js](https://nodejs.org/) (v22.x recommended)
+- [Angular CLI](https://angular.io/cli)
 
-```html
-<ul
-  appInfiniteScroller
-  [scrollCallback]="loadMore"
-  scrollPercent="70"
-  immediateCallback="true"
->
-  <li *ngFor="let item of items">{{ item.title }}</li>
-</ul>
+### Installation
+
+```sh
+git clone https://github.com/<your-username>/angular-infinite-scroll-directive.git
+cd angular-infinite-scroll-directive
+npm install
+```
+
+### Running the App
+
+```sh
+npm start
+```
+
+Visit [http://localhost:4200](http://localhost:4200) in your browser.
+
+### Running Tests
+
+```sh
+npm test
+```
+
+### Building for Production
+
+```sh
+npm run build
+```
+
+## Usage
+
+Import and use the infinite scroll directive in your Angular components.  
+See the source code for example usage.
+
+## Deployment
+
+This project uses GitHub Actions for CI/CD and can be deployed to GitHub Pages:
+
+```sh
+npm run deploy
 ```
 
 ## Contributing
 
-Pull requests are welcome. Continuous integration will lint, build, test and keep Angular up to date.
+Contributions are welcome! Please open issues or submit pull requests.
+
+## License
+
+This project is licensed under the MIT License.
