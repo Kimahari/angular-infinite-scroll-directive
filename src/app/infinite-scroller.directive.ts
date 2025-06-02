@@ -6,8 +6,7 @@ import {
   OnDestroy,
 } from "@angular/core";
 import { Observable, fromEvent, pipe, Subscription } from "rxjs";
-
-import { map, pairwise, filter, startWith, exhaustMap } from "rxjs/operators";
+import { debounceTime, map, pairwise, filter, startWith, exhaustMap } from "rxjs/operators";
 
 interface ScrollPosition {
   sH: number;
@@ -37,14 +36,11 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
 
   constructor(private elm: ElementRef) {}
 
-  @Input()
-  scrollCallback;
+  @Input() scrollCallback!: () => Observable<any>;
 
-  @Input()
-  immediateCallback;
+  @Input() immediateCallback: boolean = false;
 
-  @Input()
-  scrollPercent = 70;
+  @Input() scrollPercent: number = 70;
 
   ngAfterContentInit() {
     this.registerScrollEvent();
@@ -65,6 +61,7 @@ export class InfiniteScrollerDirective implements AfterContentInit, OnDestroy {
 
   private streamScrollEvents() {
     this.userScrolledDown$ = this.scrollEvent$.pipe(
+      debounceTime(100),
       map(
         (scrollData) =>
           ({
