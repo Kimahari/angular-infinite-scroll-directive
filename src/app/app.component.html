@@ -4,10 +4,12 @@
 </div>
 
 <ul id="infinite-scroller"
-    appInfiniteScroller
-    scrollPerecnt="70"
-    immediateCallback="true"
-    [scrollCallback]="scrollCallback">
-  <li class="item"
-      *ngFor="let item of news">{{item.title}} </li>
+  appInfiniteScroller
+  scrollPerecnt="70"
+  immediateCallback="true"
+  [scrollCallback]="scrollCallback">
+  @for (item of news; track item) {
+    <li class="item"
+    >{{item.title}} </li>
+  }
 </ul>
