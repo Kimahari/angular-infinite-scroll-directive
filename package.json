@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^21.1.2",
-    "@angular/cli": "^21.1.2",
+    "@angular/cli": "^21.2.7",
     "@angular/compiler-cli": "^21.1.2",
     "@angular/language-service": "^21.1.2",
     "@ngneat/spectator": "^15.0.1",
